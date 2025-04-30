@@ -82,8 +82,8 @@ app.post('/create-checkout-session', async (req, res) => {
       ],
       mode: 'payment',
       customer_email: email,
-      success_url: 'http://localhost:3000/success',
-      cancel_url: 'http://localhost:3000/fail',
+      success_url: `${process.env.FRONTEND_URL}/success`,
+      cancel_url: `${process.env.FRONTEND_URL}/fail`,
     };
 
     console.log('📦 Stripe session params prepared:', sessionParams);
