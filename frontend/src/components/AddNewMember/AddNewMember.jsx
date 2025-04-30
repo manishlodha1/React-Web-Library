@@ -21,36 +21,63 @@ const AddNewMember = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!formData.fullName || !formData.email || !formData.duration) {
+  
+    // 1. Validate required fields
+    const { fullName, email, phone, duration } = formData;
+    console.log('📤 Form submitted with data:', { fullName, email, phone, duration });
+  
+    if (!fullName || !email || !duration) {
+      console.warn('⚠️ Missing required fields');
       alert('Please fill in all required fields');
       return;
     }
-
-    const stripe = await stripePromise;
-
+  
+    // 2. Prepare data for backend
+    const requestData = {
+      name: fullName,
+      email,
+      phone,
+      amount: parseInt(duration) * 5000, // ₹20/month
+    };
+  
+    console.log('📦 Sending data to backend:', requestData);
+  
     try {
+      // 3. Call backend to create Stripe checkout session
       const response = await fetch('http://localhost:5000/create-checkout-session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: formData.fullName,
-          email: formData.email,
-          amount: parseInt(formData.duration) * 2000, // ₹20 per month
-        }),
+        body: JSON.stringify(requestData),
       });
-
-      const session = await response.json();
-
-      const result = await stripe.redirectToCheckout({ sessionId: session.id });
-      if (result.error) {
-        alert(result.error.message);
+  
+      const result = await response.json();
+      console.log('📥 Response from backend:', result);
+  
+      if (!response.ok) {
+        console.error('❌ Backend error:', result.error);
+        alert('Payment session creation failed.');
+        return;
       }
-    } catch (err) {
-      console.error('Stripe checkout error:', err);
-      alert('Something went wrong. Try again later.');
+  
+      // 4. Redirect to Stripe Checkout
+      const stripe = await stripePromise;
+      console.log('💳 Stripe object loaded:', stripe);
+  
+      const { id: sessionId } = result;
+      console.log('➡️ Redirecting to Stripe checkout with session ID:', sessionId);
+  
+      const redirectResult = await stripe.redirectToCheckout({ sessionId });
+  
+      if (redirectResult.error) {
+        console.error('❌ Stripe redirect error:', redirectResult.error.message);
+        alert('Stripe checkout failed. Please try again.');
+      }
+  
+    } catch (error) {
+      console.error('❗ Error during submission:', error);
+      alert('Something went wrong. Please try again later.');
     }
-  };
+  };  
 
   return (
     <div className="join-container">

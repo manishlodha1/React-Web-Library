@@ -45,45 +45,76 @@ app.get('/', async (req, res) => {
 });
 
 app.post('/create-checkout-session', async (req, res) => {
-  const { name, email, phone, amount } = req.body;
-  const durationMonths = amount / 2000;
-  const startDate = new Date();
-  const endDate = new Date();
-  endDate.setMonth(startDate.getMonth() + durationMonths);
-
   try {
-    const session = await stripe.checkout.sessions.create({
+    console.log('📥 Received request to /create-checkout-session');
+    console.log('👉 Request body:', req.body);
+
+    // 1. Extract and validate input
+    const { name, email, phone, amount } = req.body;
+
+    if (!name || !email || !phone || !amount) {
+      console.warn('⚠️ Missing required fields');
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+
+    const durationMonths = amount / 2000;
+    const startDate = new Date();
+    const endDate = new Date();
+    endDate.setMonth(startDate.getMonth() + durationMonths);
+
+    console.log('🧮 Duration:', durationMonths, 'months');
+    console.log('📆 Membership Dates:', { startDate, endDate });
+
+    // 2. Prepare Stripe session params
+    const sessionParams = {
       payment_method_types: ['card'],
-      line_items: [{
-        price_data: {
-          currency: 'inr',
-          product_data: { name: `Library Membership for ${name}` },
-          unit_amount: amount,
+      line_items: [
+        {
+          price_data: {
+            currency: 'inr',
+            product_data: {
+              name: `Library Membership for ${name}`,
+            },
+            unit_amount: amount,
+          },
+          quantity: 1,
         },
-        quantity: 1,
-      }],
+      ],
       mode: 'payment',
       customer_email: email,
       success_url: 'http://localhost:3000/success',
       cancel_url: 'http://localhost:3000/fail',
-    });
+    };
 
-    await Member.create({
+    console.log('📦 Stripe session params prepared:', sessionParams);
+
+    // 3. Create Stripe checkout session
+    const session = await stripe.checkout.sessions.create(sessionParams);
+    console.log('✅ Stripe session created:', session.id);
+
+    // 4. Save user to DB with pending payment
+    const member = await Member.create({
       name,
       email,
       phone,
       durationMonths,
       startDate,
       endDate,
-      paymentStatus: 'paid',
+      paymentStatus: 'pending',
     });
 
-    res.json({ id: session.id });
+    console.log('📝 Member created in DB:', member._id);
+
+    // 5. Return the session ID to frontend
+    return res.status(200).json({ id: session.id });
+
   } catch (err) {
-    console.error("Stripe Error:", err);
-    res.status(500).json({ error: 'Session creation failed' });
+    console.error('❌ Error creating checkout session:', err.message);
+    console.error(err); // full stack trace
+    return res.status(500).json({ error: 'Session creation failed' });
   }
 });
+
 
 app.use('/members', require('./routes/members'));
 
