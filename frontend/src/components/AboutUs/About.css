@@ -1,0 +1,159 @@
+.about-container {
+    padding: 40px 20px;
+    max-width: 1100px;
+    margin: auto;
+    font-family: 'Segoe UI', sans-serif;
+    line-height: 1.7;
+    color: #333;
+  }
+  
+  /* Hero Section */
+  .about-hero {
+    background-image: url('https://www.voicesofruralindia.org/wp-content/uploads/2020/11/ylswjsy7stw-scaled.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 80px 20px;
+    text-align: center;
+    border-radius: 10px;
+    margin-bottom: 40px;
+  }
+  
+  .about-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    font-family: 'Merriweather', serif;
+    font-weight: bold;
+  }
+  
+  .about-hero p {
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0 auto;
+    font-weight: 500;
+  }
+  
+  /* Intro Text */
+  .intro-text {
+    font-size: 1.1rem;
+    margin: 30px 0;
+    text-align: center;
+  }
+  
+  /* Amenities */
+  .amenities-section {
+    margin: 40px 0;
+  }
+  
+  .amenities-section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #222;
+  }
+  
+  .amenities-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 10px;
+    font-size: 16px;
+  }
+  
+  /* Testimonials */
+  .testimonials {
+    margin-top: 50px;
+    background: #f9f9f9;
+    padding: 30px;
+    border-radius: 10px;
+  }
+  
+  .testimonials h2 {
+    text-align: center;
+    margin-bottom: 25px;
+  }
+  
+  .testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  
+  .testimonial-card {
+    background: white;
+    padding: 20px;
+    border-left: 5px solid #0077cc;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  }
+  
+  .testimonial-card span {
+    display: block;
+    margin-top: 10px;
+    font-style: italic;
+    font-size: 0.9rem;
+  }
+  
+  /* Gallery */
+  .gallery-section {
+    margin-top: 50px;
+  }
+  
+  .gallery-section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .gallery-grid {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .gallery-grid img {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+  }
+  
+  .gallery-grid img:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Contact Info */
+  .info-section {
+    margin-top: 50px;
+    background-color: #eef3fa;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  .info-section p {
+    margin: 10px 0;
+    font-size: 1rem;
+  }
+  
+  /* CTA Button */
+  .cta-button {
+    text-align: center;
+    margin-top: 40px;
+  }
+  
+  .join-now-btn {
+    padding: 14px 28px;
+    background-color: #0077cc;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .join-now-btn:hover {
+    background-color: #005fa3;
+  }
+  

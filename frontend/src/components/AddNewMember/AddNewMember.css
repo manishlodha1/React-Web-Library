@@ -1,0 +1,94 @@
+.join-container {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #f4f4f4;
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  .join-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+  }
+  
+  .join-form input,
+  .join-form select {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .join-form button {
+    padding: 10px;
+    background-color: #0077cc;
+    color: white;
+    border: none;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .join-form button:hover {
+    background-color: #005fa3;
+  }
+  
+  /* Modal Styling */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modal {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    text-align: left;
+  }
+  
+  .modal h3 {
+    margin-bottom: 15px;
+  }
+  
+  .modal p {
+    margin: 8px 0;
+  }
+  
+  .modal-buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+  }
+  
+  .modal-buttons button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .modal-buttons button:first-child {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .modal-buttons .cancel-btn {
+    background-color: #dc3545;
+    color: white;
+  }
+  

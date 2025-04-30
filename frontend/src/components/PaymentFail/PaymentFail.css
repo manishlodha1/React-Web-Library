@@ -1,0 +1,35 @@
+.status-container {
+    max-width: 500px;
+    margin: 4rem auto;
+    padding: 2rem;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .status-container.success {
+    background-color: #e6ffed;
+    color: #2e7d32;
+  }
+  
+  .status-container.cancel {
+    background-color: #ffe6e6;
+    color: #c62828;
+  }
+  
+  .status-button {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 10px 20px;
+    background-color: #1976d2;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .status-button:hover {
+    background-color: #1565c0;
+  }
+  
